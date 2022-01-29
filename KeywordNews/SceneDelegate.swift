@@ -18,6 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         window?.backgroundColor = .systemBackground
+        window?.tintColor = .systemOrange
+//       상단바 아이콘들 오렌지로 컬러 통일한 것
         window?.rootViewController = UINavigationController(rootViewController: NewListViewController())
         window?.makeKeyAndVisible()
     }

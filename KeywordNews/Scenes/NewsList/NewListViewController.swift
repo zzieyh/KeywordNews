@@ -60,6 +60,15 @@ extension NewListViewController: NewsListProtocol{
     func endRefreshing() {
         refreshControl.endRefreshing()
     }
+    
+//    웹 뷰 구현(뉴스 불러오기)
+    
+    func moveToNewsWebViewController() {
+        let newsWebViewController = NewsWebViewController()
+        navigationController?.pushViewController(newsWebViewController, animated: true)
+    }
+    
+    
 }
 
 private extension NewListViewController {

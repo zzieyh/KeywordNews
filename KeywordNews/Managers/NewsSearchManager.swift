@@ -17,7 +17,7 @@ protocol NewsSearchManagerProtocol {
     )
 }
 
-struct NewsSearchManager {
+struct NewsSearchManager: NewsSearchManagerProtocol {
     func request(
         from keyword: String,
         start: Int,
@@ -32,7 +32,8 @@ struct NewsSearchManager {
                 "X-Naver-Client-Secret": "wHXEyuXB3c"
         ]
         
-        AF.request(url, method: .get, parameters: parameters, headers: headers)
+        AF
+            .request(url, method: .get, parameters: parameters, headers: headers)
             .responseDecodable(of: NewsResponseModel.self) { response in
                 switch response.result {
                 case .success(let result):
@@ -41,6 +42,6 @@ struct NewsSearchManager {
                     print(error)
                 }
             }
-            
+            .resume()
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 
 
 final class NewsWebViewController: UIViewController {
+    private let news: News
     
 //    웹 뷰 구현
     
@@ -26,6 +27,16 @@ final class NewsWebViewController: UIViewController {
         action: #selector(didTapRightBarButtonItem)
         
         )
+    
+    init(news: News) {
+        self.news = news
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +54,7 @@ final class NewsWebViewController: UIViewController {
 
 private extension NewsWebViewController {
     func setupNavigationBar() {
-        navigationItem.title = "기사 제목"
+        navigationItem.title = news.title.htmlToString
         navigationItem.rightBarButtonItem = rightBarButtonItem
         
     }
@@ -51,7 +62,7 @@ private extension NewsWebViewController {
 //    웹 뷰 띄우기
     
     func setupWebView() {
-        guard let linkURL = URL(string: "https://fastcampus.co.kr/") else {
+        guard let linkURL = URL(string: news.link) else {
             navigationController?.popViewController(animated: true)
             return
         }
@@ -67,7 +78,7 @@ private extension NewsWebViewController {
 //    클립보드 저장 구현
     
     @objc func didTapRightBarButtonItem() {
-        UIPasteboard.general.string = "뉴스 링크"
+        UIPasteboard.general.string = news.link
         
         
     }
